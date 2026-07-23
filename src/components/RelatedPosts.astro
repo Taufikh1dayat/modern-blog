@@ -1,0 +1,23 @@
+---
+import type { Post } from '../types/blog'
+import ArticleCard from './ArticleCard.astro'
+
+export interface Props {
+  posts: Post[]
+}
+
+const { posts } = Astro.props
+---
+
+{posts.length > 0 && (
+  <section class="mt-16 border-t border-primary-800 pt-12">
+    <h2 class="mb-8 text-2xl font-bold text-primary-50">
+      Artikel Terkait
+    </h2>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {posts.map((post) => (
+        <ArticleCard post={post} />
+      ))}
+    </div>
+  </section>
+)}

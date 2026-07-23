@@ -1,0 +1,29 @@
+---
+export interface Props {
+  headings: Array<{ depth: number; text: string; slug: string }>
+}
+
+const { headings } = Astro.props
+---
+
+<nav aria-label="Table of contents" class="mb-8 lg:mb-0">
+  <h3 class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary-400">
+    Daftar Isi
+  </h3>
+  <ul class="space-y-2 border-l-2 border-primary-800">
+    {headings
+      .filter((h) => h.depth <= 3)
+      .map((heading) => (
+        <li>
+          <a
+            href={`#${heading.slug}`}
+            class={`block text-sm transition-colors hover:text-accent-400 ${
+              heading.depth === 3 ? 'pl-8' : 'pl-4'
+            } text-primary-500`}
+          >
+            {heading.text}
+          </a>
+        </li>
+      ))}
+  </ul>
+</nav>

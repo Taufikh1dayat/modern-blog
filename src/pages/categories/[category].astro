@@ -1,0 +1,39 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro'
+import ArticleCard from '../../components/ArticleCard.astro'
+import { getCollection } from 'astro:content'
+import { getReadingTime } from '../../utils/readingTime'
+import { getPostsByCategory } from '../../utils/sortPosts'
+import type { Post } from '../../types/blog'
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog', ({ data }) => !data.draft))
+    .map((entry) => ({
+      ...entry,
+      ...entry.data,
+      slug: entry.slug,
+      readingTime: getReadingTime(entry.body),
+    })) as Post[]
+
+  const categories = [...new Set(posts.map((p) => p.category))]
+  return categories.map((cat) => ({
+    params: { category: cat.toLowerCase() },
+    props: { category: cat, posts },
+  }))
+}
+
+const { category, posts } = Astro.props
+const filtered = getPostsByCategory(posts, category)
+---
+
+<PageLayout title={`Kategori: ${category}`} description={`Artikel dalam kategori ${category}.`}>
+  {filtered.length > 0 ? (
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {filtered.map((post) => <ArticleCard post={post} />)}
+    </div>
+  ) : (
+    <div class="rounded-xl border border-dashed border-primary-700 p-16 text-center">
+      <p class="text-primary-500">Tidak ada artikel di kategori ini.</p>
+    </div>
+  )}
+</PageLayout>

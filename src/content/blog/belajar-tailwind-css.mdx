@@ -1,0 +1,107 @@
+---
+title: 'Belajar Tailwind CSS: Utility-First Framework untuk Styling Cepat'
+description: 'Pelajari cara menggunakan Tailwind CSS untuk membangun antarmuka web modern dengan pendekatan utility-first. Lengkap dengan contoh kode.'
+pubDate: 2026-07-05
+author: 'Penghijauan Team'
+tags: ['tailwind', 'css', 'frontend', 'styling']
+category: 'Frontend'
+featured: true
+---
+
+Tailwind CSS telah merevolusi cara developer menulis CSS. Dengan pendekatan utility-first, kita bisa membangun UI kustom dengan cepat tanpa meninggalkan HTML.
+
+## Apa itu Tailwind CSS?
+
+Tailwind CSS adalah framework CSS utility-first yang menyediakan kelas-kelas siap pakai seperti `flex`, `pt-4`, `text-center`, dan `rotate-90`.
+
+```css
+/* Tanpa Tailwind — nulis CSS manual */
+.btn-primary {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+}
+
+/* Dengan Tailwind — cukup di HTML */
+/* <button class="bg-blue-500 text-white px-4 py-2 rounded-md">Klik</button> */
+```
+
+## Kenapa Utility-First?
+
+### Kecepatan Development
+
+Dengan Tailwind, kamu ga perlu gonta-ganti file CSS. Semua styling ada di HTML.
+
+### Konsisten
+
+Tailwind menggunakan design system yang terstandarisasi — spacing, warna, typography semuanya konsisten.
+
+### Bundle Kecil
+
+PurgeCSS otomatis menghapus utility yang tidak dipakai, hasil bundle bisa < 10KB!
+
+## Memulai dengan Tailwind
+
+### Instalasi via npm
+
+```bash
+npm install tailwindcss @tailwindcss/vite
+```
+
+### Konfigurasi Vite
+
+```js
+import tailwindcss from '@tailwindcss/vite'
+
+export default {
+  plugins: [tailwindcss()],
+}
+```
+
+### CSS Entry
+
+```css
+@import 'tailwindcss';
+```
+
+## Contoh Praktis
+
+### Card Component
+
+```html
+<div class="max-w-sm rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+  <img
+    class="mb-4 h-48 w-full rounded-md object-cover"
+    src="image.jpg"
+    alt="Card image"
+  />
+  <h3 class="mb-2 text-xl font-semibold text-gray-900">
+    Judul Card
+  </h3>
+  <p class="mb-4 text-gray-600">
+    Ini adalah deskripsi dari card component.
+  </p>
+  <button class="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
+    Baca Selengkapnya
+  </button>
+</div>
+```
+
+### Responsive Design
+
+Tailwind menggunakan prefix `sm:`, `md:`, `lg:`, `xl:` untuk breakpoint:
+
+```html
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div class="p-4">Item 1</div>
+  <div class="p-4">Item 2</div>
+  <div class="p-4">Item 3</div>
+</div>
+```
+
+## Kesimpulan
+
+Tailwind CSS mengubah cara kita menulis CSS. Dengan utility-first, kita lebih cepat, konsisten, dan hasil bundle lebih kecil. Cocok untuk proyek skala kecil hingga besar.
+
+Selamat mencoba! 🎨

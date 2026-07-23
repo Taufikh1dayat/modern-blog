@@ -1,0 +1,32 @@
+<script>
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll('pre').forEach((pre) => {
+      // Skip if button already added
+      if (pre.querySelector('.copy-btn')) return
+
+      const btn = document.createElement('button')
+      btn.className =
+        'copy-btn absolute top-3 right-3 rounded-md bg-primary-800 px-2 py-1 text-xs text-primary-300 opacity-0 transition-opacity hover:bg-primary-700 group-hover:opacity-100'
+      btn.textContent = 'Salin'
+
+      const wrapper = document.createElement('div')
+      wrapper.className = 'group relative'
+      pre.parentNode?.insertBefore(wrapper, pre)
+      wrapper.appendChild(pre)
+      wrapper.appendChild(btn)
+
+      btn.addEventListener('click', async () => {
+        const code = pre.querySelector('code')?.textContent || ''
+        try {
+          await navigator.clipboard.writeText(code)
+          btn.textContent = 'Tersalin!'
+          setTimeout(() => {
+            btn.textContent = 'Salin'
+          }, 2000)
+        } catch {
+          btn.textContent = 'Gagal'
+        }
+      })
+    })
+  })
+</script>

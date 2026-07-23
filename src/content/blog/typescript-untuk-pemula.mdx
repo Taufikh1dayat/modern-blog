@@ -1,0 +1,85 @@
+---
+title: 'TypeScript untuk Pemula: Kenapa dan Bagaimana Memulainya'
+description: 'Panduan TypeScript untuk pemula — dari basic types sampai advanced features. Cocok untuk developer JavaScript yang ingin beralih ke TypeScript.'
+pubDate: 2026-07-15
+author: 'Penghijauan Team'
+tags: ['typescript', 'javascript', 'pemrograman']
+category: 'Pemrograman'
+featured: false
+---
+
+TypeScript adalah superset dari JavaScript yang menambahkan static typing. Kode TypeScript dikompilasi menjadi JavaScript biasa.
+
+## Kenapa TypeScript?
+
+### 1. Catch Error di Compile Time
+
+```typescript
+// JavaScript — error baru ketahuan di runtime
+function add(a, b) {
+  return a + b
+}
+add("2", 3) // "23" — bukan yang diharapkan!
+
+// TypeScript — error ketahuan pas nulis kode
+function add(a: number, b: number): number {
+  return a + b
+}
+add("2", 3) // ❌ Error: Argument of type 'string' is not assignable
+```
+
+### 2. Better IDE Support
+
+Autocomplete, refactoring, dan navigation jadi lebih baik dengan type information.
+
+### 3. Self-Documenting Code
+
+```typescript
+interface User {
+  id: number
+  name: string
+  email: string
+  role: 'admin' | 'user'
+}
+// Type-nya udah jelas tanpa perlu baca implementasi
+```
+
+## Basic Types
+
+```typescript
+// Primitive types
+const name: string = 'John'
+const age: number = 25
+const isActive: boolean = true
+
+// Array
+const fruits: string[] = ['apple', 'banana']
+
+// Object
+const user: { id: number; name: string } = {
+  id: 1,
+  name: 'John',
+}
+
+// Union type
+const status: 'active' | 'inactive' = 'active'
+
+// Optional property
+interface Config {
+  url: string
+  timeout?: number // optional
+}
+```
+
+## Type Inference
+
+Kamu ga selalu perlu nulis tipe — TypeScript cukup pintar untuk infer:
+
+```typescript
+const message = 'Hello' // TypeScript tahu ini string
+const count = 42 // TypeScript tahu ini number
+```
+
+## Kesimpulan
+
+TypeScript meningkatkan kualitas kode, mengurangi bug, dan membuat kode lebih mudah dipelihara. Mulailah dengan tipe dasar, dan pelajari fitur lanjutan seiring waktu.

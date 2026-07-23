@@ -1,0 +1,117 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro'
+import ReadingProgress from '../../components/ReadingProgress.astro'
+import TableOfContents from '../../components/TableOfContents.astro'
+import RelatedPosts from '../../components/RelatedPosts.astro'
+import CopyCodeButton from '../../components/CopyCodeButton.astro'
+import { formatDate } from '../../utils/formatDate'
+import { getCollection } from 'astro:content'
+import { getReadingTime } from '../../utils/readingTime'
+import { getRelatedPosts, getPrevNext } from '../../utils/sortPosts'
+import type { Post } from '../../types/blog'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft)
+  return posts.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }))
+}
+
+const { entry } = Astro.props
+const { Content, headings } = await entry.render()
+
+// Cast to Post type
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .map((e) => ({
+    ...e,
+    ...e.data,
+    slug: e.slug,
+    readingTime: getReadingTime(e.body),
+  })) as Post[]
+
+const post = { ...entry, ...entry.data, slug: entry.slug, readingTime: getReadingTime(entry.body) } as Post
+const related = getRelatedPosts(allPosts, post)
+const { prev, next } = getPrevNext(allPosts, post)
+---
+
+<BlogLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  breadcrumbs={[
+    { text: entry.data.category, href: `/categories/${encodeURIComponent(entry.data.category.toLowerCase())}` },
+    { text: entry.data.title },
+  ]}
+>
+  <ReadingProgress slot="head" />
+  <CopyCodeButton />
+
+  <fragment slot="content">
+    <!-- Article Header -->
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold tracking-tight text-primary-50 lg:text-4xl">
+        {entry.data.title}
+      </h1>
+      <div class="mt-4 flex flex-wrap items-center gap-3 text-sm text-primary-500">
+        <span>{entry.data.author}</span>
+        <span>&middot;</span>
+        <time datetime={entry.data.pubDate.toISOString()}>
+          {formatDate(entry.data.pubDate)}
+        </time>
+        <span>&middot;</span>
+        <span>{post.readingTime} menit baca</span>
+      </div>
+      {entry.data.tags.length > 0 && (
+        <div class="mt-4 flex flex-wrap gap-2">
+          {entry.data.tags.map((tag: string) => (
+            <a
+              href={`/tags/${encodeURIComponent(tag.toLowerCase())}`}
+              class="rounded-full bg-primary-800 px-3 py-1 text-xs font-medium text-primary-400 transition-colors hover:bg-primary-700"
+            >
+              #{tag}
+            </a>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <!-- Article Body -->
+    <div class="prose-custom">
+      <Content />
+    </div>
+
+    <!-- Previous / Next Navigation -->
+    <nav class="mt-12 grid grid-cols-2 gap-4 border-t border-primary-800 pt-8">
+      <div>
+        {prev ? (
+          <a href={`/articles/${prev.slug}`} class="group flex flex-col">
+            <span class="text-xs text-primary-400">Sebelumnya</span>
+            <span class="text-sm font-medium text-primary-300 transition-colors group-hover:text-accent-400">
+              {prev.title}
+            </span>
+          </a>
+        ) : null}
+      </div>
+      <div class="text-right">
+        {next ? (
+          <a href={`/articles/${next.slug}`} class="group flex flex-col">
+            <span class="text-xs text-primary-400">Selanjutnya</span>
+            <span class="text-sm font-medium text-primary-300 transition-colors group-hover:text-accent-400">
+              {next.title}
+            </span>
+          </a>
+        ) : null}
+      </div>
+    </nav>
+  </fragment>
+
+  <fragment slot="sidebar">
+    {headings && headings.length > 1 && (
+      <TableOfContents headings={headings} />
+    )}
+  </fragment>
+
+  <fragment slot="bottom">
+    <RelatedPosts posts={related} />
+  </fragment>
+</BlogLayout>

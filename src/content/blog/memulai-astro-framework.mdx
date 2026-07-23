@@ -1,0 +1,64 @@
+---
+title: 'Memulai Astro: Framework Web Modern untuk Static Site'
+description: 'Panduan lengkap memulai Astro — framework web modern yang menghasilkan situs statis super cepat dengan dukungan MDX,岛屿架构, dan integrasi framework favoritmu.'
+pubDate: 2026-07-10
+author: 'Penghijauan Team'
+tags: ['astro', 'framework', 'static-site', 'web']
+category: 'Pemrograman'
+featured: false
+---
+
+Astro adalah framework web modern yang dirancang untuk menghasilkan situs statis super cepat. Dengan pendekatan **"zero JS by default"**, Astro hanya mengirimkan JavaScript yang benar-benar dibutuhkan.
+
+## Kenapa Astro?
+
+- ⚡ **Speed** — Static site generation, zero JS by default
+- 🏝️ **Islands Architecture** — Interaktivitas hanya di komponen spesifik
+- 🔧 **Framework-agnostic** — Bisa pake React, Vue, Svelte, atau vanilla
+- 📝 **MDX built-in** — Nulis konten pake Markdown + JSX
+- 🚀 **Deploy anywhere** — Vercel, Netlify, Cloudflare Pages
+
+## Quick Start
+
+```bash
+# Buat project baru
+npm create astro@latest
+
+# Masuk ke folder
+cd my-project
+
+# Jalankan dev server
+npm run dev
+```
+
+### Struktur Folder
+
+```
+src/
+├── components/  # UI components
+├── layouts/     # Layout templates
+├── pages/       # Routes (file-based routing)
+├── content/     # Content collections
+└── styles/      # Global styles
+```
+
+## Content Collections
+
+Astro punya sistem content collection dengan validasi schema:
+
+```ts
+import { defineCollection, z } from 'astro:content'
+
+const blog = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    pubDate: z.date(),
+    tags: z.array(z.string()),
+  }),
+})
+```
+
+## Kesimpulan
+
+Astro cocok untuk blog, dokumentasi, landing page, dan situs konten-heavy lainnya. Dengan performa luar biasa dan developer experience yang mulus, ini pilihan tepat untuk proyek web modern.

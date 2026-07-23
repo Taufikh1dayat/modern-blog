@@ -1,0 +1,38 @@
+---
+import BaseLayout from './BaseLayout.astro'
+import Navbar from '../components/Navbar.astro'
+import Footer from '../components/Footer.astro'
+import Breadcrumb from '../components/Breadcrumb.astro'
+import type { Props as BaseProps } from './BaseLayout.astro'
+
+interface Props extends BaseProps {
+  title: string
+  category?: string
+  breadcrumbs?: Array<{ text: string; href?: string }>
+}
+
+const { title, description, category, breadcrumbs = [] } = Astro.props
+---
+
+<BaseLayout title={title} description={description} type="article">
+  <Navbar />
+  <main class="flex-1">
+    <article class="container-page py-8">
+      {breadcrumbs.length > 0 && (
+        <Breadcrumb items={breadcrumbs} />
+      )}
+      <div class="lg:grid lg:grid-cols-[1fr_280px] lg:gap-12">
+        <div class="min-w-0">
+          <slot name="content" />
+        </div>
+        <aside class="hidden lg:block">
+          <div class="sticky top-24">
+            <slot name="sidebar" />
+          </div>
+        </aside>
+      </div>
+      <slot name="bottom" />
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>

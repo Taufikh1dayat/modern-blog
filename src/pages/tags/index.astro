@@ -1,0 +1,37 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro'
+import { getCollection } from 'astro:content'
+import { getReadingTime } from '../../utils/readingTime'
+import { getTags } from '../../utils/sortPosts'
+import type { Post } from '../../types/blog'
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .map((entry) => ({
+    ...entry,
+    ...entry.data,
+    slug: entry.slug,
+    readingTime: getReadingTime(entry.body),
+  })) as Post[]
+
+const tags = getTags(posts)
+---
+
+<PageLayout title="Tags" description="Jelajahi artikel berdasarkan tag.">
+  {tags.length > 0 ? (
+    <div class="flex flex-wrap gap-3">
+      {tags.map((tag) => (
+        <a
+          href={`/tags/${encodeURIComponent(tag.name.toLowerCase())}`}
+          class="rounded-full bg-primary-800 px-4 py-2 text-sm font-medium text-primary-300 transition-colors hover:bg-accent-900/50 hover:text-accent-300"
+        >
+          #{tag.name}
+          <span class="ml-1 text-xs text-primary-400">({tag.count})</span>
+        </a>
+      ))}
+    </div>
+  ) : (
+    <div class="rounded-xl border border-dashed border-primary-700 p-16 text-center">
+      <p class="text-primary-500">Belum ada tag.</p>
+    </div>
+  )}
+</PageLayout>

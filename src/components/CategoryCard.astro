@@ -1,0 +1,20 @@
+---
+export interface Props {
+  name: string
+  count: number
+}
+
+const { name, count } = Astro.props
+---
+
+<a
+  href={`/categories/${encodeURIComponent(name.toLowerCase())}`}
+  class="group rounded-xl border border-primary-800 bg-primary-900/50 p-6 transition-all hover:border-accent-600/50 hover:bg-primary-900 hover:shadow-lg hover:shadow-accent-500/5 hover:-translate-y-1"
+>
+  <h3 class="text-lg font-semibold text-primary-50 transition-colors group-hover:text-accent-400">
+    {name}
+  </h3>
+  <p class="mt-1 text-sm text-primary-500">
+    {count} {count === 1 ? 'artikel' : 'artikel'}
+  </p>
+</a>

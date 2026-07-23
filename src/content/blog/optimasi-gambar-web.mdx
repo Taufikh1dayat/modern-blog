@@ -1,0 +1,86 @@
+---
+title: 'Optimasi Gambar untuk Web: Teknik & Tools Terbaru 2026'
+description: 'Panduan lengkap optimasi gambar untuk web — format modern, lazy loading, responsive images, dan tools yang wajib kamu coba.'
+pubDate: 2026-07-20
+author: 'Penghijauan Team'
+tags: ['optimasi', 'gambar', 'performa', 'web']
+category: 'Frontend'
+featured: false
+---
+
+Gambar adalah elemen terberat di halaman web. Rata-rata, gambar menyumbang **60-70%** dari total bobot halaman. Optimasi gambar bisa meningkatkan performa secara signifikan.
+
+## Format Gambar Modern
+
+### AVIF vs WebP vs JPEG
+
+| Format | Kompresi | Dukungan Browser | Kasus Pakai |
+|--------|----------|------------------|-------------|
+| JPEG | Standar | Universal | Foto |
+| WebP | 25-35% lebih kecil dari JPEG | 96% browser | Universal |
+| AVIF | 50% lebih kecil dari JPEG | 90% browser | Foto & grafis kompleks |
+
+### Contoh perbandingan ukuran:
+
+```bash
+foto.jpg      → 500 KB
+foto.webp     → 320 KB  (36% lebih kecil)
+foto.avif     → 210 KB  (58% lebih kecil)
+```
+
+## Teknik Optimasi
+
+### 1. Responsive Images dengan `<picture>`
+
+```html
+<picture>
+  <source srcset="image.avif" type="image/avif" />
+  <source srcset="image.webp" type="image/webp" />
+  <img
+    src="image.jpg"
+    alt="Deskripsi gambar"
+    loading="lazy"
+    decoding="async"
+    width="800"
+    height="600"
+  />
+</picture>
+```
+
+### 2. Lazy Loading
+
+```html
+<!-- Native lazy loading — semua browser modern support -->
+<img src="image.jpg" loading="lazy" alt="..." />
+
+<!-- Intersection Observer untuk kontrol lebih -->
+<img data-src="image.jpg" class="lazy" alt="..." />
+```
+
+### 3. Ukuran yang Tepat
+
+Jangan kirim gambar 4000px untuk ditampilkan di 300px. Gunakan beberapa resolusi:
+
+```html
+<img
+  srcset="
+    image-300w.jpg 300w,
+    image-600w.jpg 600w,
+    image-1200w.jpg 1200w
+  "
+  sizes="(max-width: 600px) 300px, (max-width: 1200px) 600px, 1200px"
+  src="image-600w.jpg"
+  alt="..."
+/>
+```
+
+## Tools Rekomendasi
+
+- **Squoosh** — Online image optimizer dari Chrome team
+- **Sharp** — Node.js image processing library
+- **ImageOptim** — GUI tools untuk macOS
+- **Cloudinary/Imgix** — CDN dengan transformasi otomatis
+
+## Kesimpulan
+
+Optimasi gambar adalah low-hanging fruit untuk performa web. Dengan format modern, responsive images, dan lazy loading, kamu bisa kurangi bobot halaman hingga 60%. 

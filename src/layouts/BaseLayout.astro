@@ -1,0 +1,104 @@
+---
+import { SITE } from '../config/site'
+import '../styles/global.css'
+
+export interface Props {
+  title: string
+  description?: string
+  image?: string
+  type?: 'website' | 'article'
+  publishedTime?: string
+  tags?: string[]
+}
+
+const {
+  title: pageTitle,
+  description = SITE.description,
+  image = '/og-default.jpg',
+  type = 'website',
+  publishedTime,
+  tags = [],
+} = Astro.props
+
+const fullTitle = `${pageTitle} — ${SITE.title}`
+const canonical = new URL(Astro.url.pathname, SITE.url).href
+---
+
+<!DOCTYPE html>
+<html lang={SITE.lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta -->
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- OpenGraph -->
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, SITE.url).href} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content={type} />
+    <meta property="og:locale" content={SITE.locale} />
+    <meta property="og:site_name" content={SITE.title} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, SITE.url).href} />
+
+    <!-- JSON-LD BreadcrumbList -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: SITE.title, item: SITE.url },
+      ],
+    })} />
+
+    <!-- Article JSON-LD -->
+    {type === 'article' && publishedTime && (
+      <script
+        type="application/ld+json"
+        set:html={JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: pageTitle,
+          description,
+          image: new URL(image, SITE.url).href,
+          datePublished: publishedTime,
+          author: { '@type': 'Person', name: SITE.author },
+          publisher: {
+            '@type': 'Organization',
+            name: SITE.title,
+          },
+          keywords: tags.join(', '),
+          mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+        })}
+      />
+    )}
+
+    <!-- Theme Script — default dark -->
+    <script is:inline>
+      (function () {
+        const theme = localStorage.getItem('theme')
+        if (theme === 'light') {
+          document.documentElement.classList.remove('dark')
+        } else {
+          document.documentElement.classList.add('dark')
+          if (!theme) localStorage.setItem('theme', 'dark')
+        }
+      })()
+    </script>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <slot name="head" />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,180 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-primary-50: oklch(0.968 0.007 247.9);
+  --color-primary-100: oklch(0.929 0.013 255.5);
+  --color-primary-200: oklch(0.869 0.022 254.2);
+  --color-primary-300: oklch(0.788 0.035 256.8);
+  --color-primary-400: oklch(0.692 0.053 256.7);
+  --color-primary-500: oklch(0.554 0.079 256.5);
+  --color-primary-600: oklch(0.446 0.082 256.8);
+  --color-primary-700: oklch(0.372 0.064 257.3);
+  --color-primary-800: oklch(0.279 0.041 257.3);
+  --color-primary-900: oklch(0.208 0.032 258.4);
+  --color-primary-950: oklch(0.129 0.018 261.1);
+
+  --color-accent-50: oklch(0.962 0.044 156.7);
+  --color-accent-100: oklch(0.922 0.074 155.6);
+  --color-accent-200: oklch(0.871 0.113 153.1);
+  --color-accent-300: oklch(0.811 0.147 155.7);
+  --color-accent-400: oklch(0.755 0.193 153.7);
+  --color-accent-500: oklch(0.696 0.228 151.3);
+  --color-accent-600: oklch(0.596 0.216 150.3);
+  --color-accent-700: oklch(0.508 0.176 149.5);
+  --color-accent-800: oklch(0.406 0.13 148.9);
+  --color-accent-900: oklch(0.315 0.089 148.4);
+  --color-accent-950: oklch(0.222 0.058 148.3);
+
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-primary-950 text-primary-50 antialiased;
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    @apply bg-accent-800;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary-700 rounded-full;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .prose-custom {
+    @apply text-primary-300 leading-relaxed;
+  }
+
+  .prose-custom h1,
+  .prose-custom h2,
+  .prose-custom h3,
+  .prose-custom h4 {
+    @apply text-primary-50 font-semibold;
+  }
+
+  .prose-custom h2 {
+    @apply mt-12 mb-4 text-2xl;
+  }
+
+  .prose-custom h3 {
+    @apply mt-8 mb-3 text-xl;
+  }
+
+  .prose-custom p {
+    @apply mb-4;
+  }
+
+  .prose-custom a {
+    @apply text-accent-400 hover:underline;
+  }
+
+  .prose-custom pre {
+    @apply bg-primary-900 text-primary-50 rounded-lg p-4 overflow-x-auto my-6;
+  }
+
+  .prose-custom code {
+    @apply font-mono text-sm;
+  }
+
+  .prose-custom :not(pre) > code {
+    @apply bg-primary-800 text-accent-300 px-1.5 py-0.5 rounded;
+  }
+
+  .prose-custom blockquote {
+    @apply border-l-4 border-accent-600 pl-4 italic my-6;
+  }
+
+  .prose-custom ul,
+  .prose-custom ol {
+    @apply mb-4 pl-6;
+  }
+
+  .prose-custom li {
+    @apply mb-2;
+  }
+
+  .prose-custom img {
+    @apply rounded-lg my-8 w-full h-auto;
+  }
+
+  .prose-custom hr {
+    @apply border-primary-800 my-12;
+  }
+
+  .prose-custom table {
+    @apply w-full border-collapse my-6;
+  }
+
+  .prose-custom th {
+    @apply bg-primary-800 text-primary-300 font-semibold px-4 py-2 text-left border border-primary-700;
+  }
+
+  .prose-custom td {
+    @apply px-4 py-2 border border-primary-700;
+  }
+
+  /* Animations */
+  .animate-fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-up-delay-1 {
+    animation-delay: 0.15s;
+  }
+  .animate-fade-up-delay-2 {
+    animation-delay: 0.3s;
+  }
+  .animate-fade-up-delay-3 {
+    animation-delay: 0.45s;
+  }
+  .animate-fade-up-delay-4 {
+    animation-delay: 0.6s;
+  }
+
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Scale in animation for cards */
+  .animate-scale-in {
+    opacity: 0;
+    transform: scale(0.95);
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+
+  @keyframes scaleIn {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}

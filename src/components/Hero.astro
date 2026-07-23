@@ -1,0 +1,48 @@
+---
+import { SITE } from '../config/site'
+---
+
+<section class="relative overflow-hidden border-b border-primary-800/50 bg-gradient-to-b from-primary-900/80 via-primary-950 to-primary-950">
+  <!-- Subtle grid overlay -->
+  <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
+
+  <div class="container-page relative py-24 text-center lg:py-36">
+    <!-- Animated heading -->
+    <h1 class="text-4xl font-bold tracking-tight sm:text-5xl lg:text-7xl">
+      <span class="animate-fade-up inline-block">Belajar</span>{' '}
+      <span class="animate-fade-up animate-fade-up-delay-1 inline-block bg-gradient-to-r from-accent-400 via-blue-400 to-accent-300 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">Teknologi</span>{' '}
+      <span class="animate-fade-up animate-fade-up-delay-2 inline-block">Terbaru</span>
+    </h1>
+
+    <!-- Animated subtitle -->
+    <p class="animate-fade-up animate-fade-up-delay-3 mx-auto mt-6 max-w-2xl text-lg text-primary-400 leading-relaxed">
+      {SITE.description}
+    </p>
+
+    <!-- Animated CTAs -->
+    <div class="animate-fade-up animate-fade-up-delay-4 mt-10 flex flex-wrap items-center justify-center gap-4">
+      <a
+        href="/articles"
+        class="group relative rounded-xl bg-accent-600 px-8 py-3.5 text-sm font-medium text-white transition-all hover:bg-accent-500 hover:scale-105 active:scale-95"
+      >
+        Lihat Artikel
+      </a>
+      <a
+        href="/categories"
+        class="group relative rounded-xl border border-primary-700 bg-primary-900/50 px-8 py-3.5 text-sm font-medium text-primary-300 transition-all hover:border-primary-500 hover:text-primary-50 hover:bg-primary-800/50 hover:scale-105 active:scale-95"
+      >
+        Jelajahi Kategori
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes gradient {
+    0%, 100% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+  }
+  .animate-gradient {
+    animation: gradient 4s ease infinite;
+  }
+</style>

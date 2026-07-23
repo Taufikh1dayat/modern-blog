@@ -1,0 +1,78 @@
+---
+import { SITE } from '../config/site'
+---
+
+<footer class="border-t border-primary-800/50">
+  <div class="container-page py-12">
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <!-- Brand -->
+      <div>
+        <a href="/" class="text-lg font-bold text-primary-50 transition-colors hover:text-accent-400">
+          {SITE.title}
+        </a>
+        <p class="mt-2 text-sm text-primary-500">
+          {SITE.description}
+        </p>
+      </div>
+
+      <!-- Navigation -->
+      <div>
+        <h3 class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary-400">
+          Navigasi
+        </h3>
+        <ul class="space-y-2">
+          {SITE.nav.map((item) => (
+            <li>
+              <a
+                href={item.link}
+                class="text-sm text-primary-500 transition-colors hover:text-primary-300"
+              >
+                {item.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Categories -->
+      <div>
+        <h3 class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary-400">
+          Kategori
+        </h3>
+        <ul class="space-y-2">
+          <li><a href="/categories/frontend" class="text-sm text-primary-500 transition-colors hover:text-primary-300">Frontend</a></li>
+          <li><a href="/categories/pemrograman" class="text-sm text-primary-500 transition-colors hover:text-primary-300">Pemrograman</a></li>
+        </ul>
+      </div>
+
+      <!-- Newsletter Placeholder -->
+      <div>
+        <h3 class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary-400">
+          Newsletter
+        </h3>
+        <p class="mb-3 text-sm text-primary-500">
+          Dapatkan artikel terbaru langsung di emailmu.
+        </p>
+        <form class="flex gap-2" onsubmit="event.preventDefault()">
+          <input
+            type="email"
+            placeholder="email@contoh.com"
+            class="flex-1 rounded-xl border border-primary-700 bg-primary-900 px-3 py-2 text-sm text-primary-100 placeholder-primary-500 focus:border-accent-500 focus:outline-none focus:ring-2 focus:ring-accent-500/20"
+          />
+          <button
+            type="submit"
+            class="rounded-xl bg-accent-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-accent-500"
+          >
+            Langganan
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="mt-8 border-t border-primary-800 pt-6">
+      <p class="text-center text-xs text-primary-500">
+        &copy; {new Date().getFullYear()} {SITE.title}. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>
