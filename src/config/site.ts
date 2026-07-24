@@ -1,5 +1,5 @@
 export const SITE = {
-  title: 'Belajar Teknologi Terbaru',
+  title: 'TaufikDev',
   description: 'Blog tentang teknologi, pemrograman, dan pengembangan web modern.',
   url: 'https://penghijauan.my.id',
   author: 'Belajar Teknologi Terbaru',
@@ -16,6 +16,7 @@ export const SITE = {
 
   social: {
     github: 'https://github.com/Taufikh1dayat',
+    linkedin: 'https://www.linkedin.com/in/m-taufik-hidayat-051541240/',
   },
 } as const
 

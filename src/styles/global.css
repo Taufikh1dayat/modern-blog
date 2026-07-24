@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-primary-50: oklch(0.968 0.007 247.9);
   --color-primary-100: oklch(0.929 0.013 255.5);
@@ -39,12 +41,12 @@
   }
 
   body {
-    @apply bg-primary-950 text-primary-50 antialiased;
+    @apply bg-white text-primary-950 antialiased dark:bg-primary-950 dark:text-primary-50;
     font-family: var(--font-sans);
   }
 
   ::selection {
-    @apply bg-accent-800;
+    @apply bg-accent-200 dark:bg-accent-800;
   }
 
   ::-webkit-scrollbar {
@@ -56,7 +58,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-primary-700 rounded-full;
+    @apply bg-primary-200 rounded-full dark:bg-primary-700;
   }
 }
 
@@ -66,14 +68,14 @@
   }
 
   .prose-custom {
-    @apply text-primary-300 leading-relaxed;
+    @apply text-primary-700 leading-relaxed dark:text-primary-300;
   }
 
   .prose-custom h1,
   .prose-custom h2,
   .prose-custom h3,
   .prose-custom h4 {
-    @apply text-primary-50 font-semibold;
+    @apply text-primary-950 dark:text-primary-50 font-semibold;
   }
 
   .prose-custom h2 {
@@ -89,11 +91,11 @@
   }
 
   .prose-custom a {
-    @apply text-accent-400 hover:underline;
+    @apply text-accent-600 hover:underline dark:text-accent-400;
   }
 
   .prose-custom pre {
-    @apply bg-primary-900 text-primary-50 rounded-lg p-4 overflow-x-auto my-6;
+    @apply bg-primary-950 text-primary-50 dark:bg-primary-900 rounded-lg p-4 overflow-x-auto my-6;
   }
 
   .prose-custom code {
@@ -101,11 +103,11 @@
   }
 
   .prose-custom :not(pre) > code {
-    @apply bg-primary-800 text-accent-300 px-1.5 py-0.5 rounded;
+    @apply bg-primary-100 text-accent-700 px-1.5 py-0.5 rounded dark:bg-primary-800 dark:text-accent-300;
   }
 
   .prose-custom blockquote {
-    @apply border-l-4 border-accent-600 pl-4 italic my-6;
+    @apply border-l-4 border-accent-400 pl-4 italic my-6 dark:border-accent-600;
   }
 
   .prose-custom ul,
@@ -122,7 +124,7 @@
   }
 
   .prose-custom hr {
-    @apply border-primary-800 my-12;
+    @apply border-primary-200 my-12 dark:border-primary-800;
   }
 
   .prose-custom table {
@@ -130,11 +132,11 @@
   }
 
   .prose-custom th {
-    @apply bg-primary-800 text-primary-300 font-semibold px-4 py-2 text-left border border-primary-700;
+    @apply bg-primary-50 text-primary-700 font-semibold px-4 py-2 text-left border border-primary-200 dark:bg-primary-800 dark:text-primary-300 dark:border-primary-700;
   }
 
   .prose-custom td {
-    @apply px-4 py-2 border border-primary-700;
+    @apply px-4 py-2 border border-primary-200 dark:border-primary-700;
   }
 
   /* Animations */
@@ -144,27 +146,15 @@
     animation: fadeUp 0.6s ease-out forwards;
   }
 
-  .animate-fade-up-delay-1 {
-    animation-delay: 0.15s;
-  }
-  .animate-fade-up-delay-2 {
-    animation-delay: 0.3s;
-  }
-  .animate-fade-up-delay-3 {
-    animation-delay: 0.45s;
-  }
-  .animate-fade-up-delay-4 {
-    animation-delay: 0.6s;
-  }
+  .animate-fade-up-delay-1 { animation-delay: 0.15s; }
+  .animate-fade-up-delay-2 { animation-delay: 0.3s; }
+  .animate-fade-up-delay-3 { animation-delay: 0.45s; }
+  .animate-fade-up-delay-4 { animation-delay: 0.6s; }
 
   @keyframes fadeUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Scale in animation for cards */
   .animate-scale-in {
     opacity: 0;
     transform: scale(0.95);
@@ -172,9 +162,6 @@
   }
 
   @keyframes scaleIn {
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
+    to { opacity: 1; transform: scale(1); }
   }
 }
