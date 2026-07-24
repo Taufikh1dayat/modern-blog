@@ -7,6 +7,7 @@ export const SITE = {
   lang: 'id',
 
   nav: [
+    { text: 'Beranda', link: '/' },
     { text: 'Artikel', link: '/articles' },
     { text: 'Kategori', link: '/categories' },
     { text: 'Tags', link: '/tags' },
@@ -14,7 +15,7 @@ export const SITE = {
   ],
 
   social: {
-    github: 'https://github.com/penghijauan',
+    github: 'https://github.com/Taufikh1dayat',
   },
 } as const
 

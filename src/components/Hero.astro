@@ -10,13 +10,16 @@ import { SITE } from '../config/site'
     <!-- Animated heading -->
     <h1 class="text-4xl font-bold tracking-tight sm:text-5xl lg:text-7xl">
       <span class="animate-fade-up inline-block">Belajar</span>{' '}
-      <span class="animate-fade-up animate-fade-up-delay-1 inline-block bg-gradient-to-r from-accent-400 via-blue-400 to-accent-300 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">Teknologi</span>{' '}
+      <span class="animate-fade-up animate-fade-up-delay-1 inline-block">
+        <span class="bg-gradient-to-r from-accent-400 via-blue-400 to-accent-300 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">Teknologi</span>
+      </span>{' '}
       <span class="animate-fade-up animate-fade-up-delay-2 inline-block">Terbaru</span>
     </h1>
 
-    <!-- Animated subtitle -->
-    <p class="animate-fade-up animate-fade-up-delay-3 mx-auto mt-6 max-w-2xl text-lg text-primary-400 leading-relaxed">
-      {SITE.description}
+    <!-- Typewriting subtitle -->
+    <p id="typewriter" class="mx-auto mt-6 max-w-2xl text-lg text-primary-400 leading-relaxed min-h-[1.8em]">
+      <span id="typewriter-text"></span>
+      <span id="typewriter-cursor" class="inline-block w-[2px] h-[1em] bg-accent-400 ml-0.5 animate-pulse align-middle"></span>
     </p>
 
     <!-- Animated CTAs -->
@@ -46,3 +49,57 @@ import { SITE } from '../config/site'
     animation: gradient 4s ease infinite;
   }
 </style>
+
+<script>
+  const words = [
+    'Blog tentang teknologi, pemrograman, dan pengembangan web modern.',
+    'Tutorial React, Astro, Tailwind CSS, dan TypeScript.',
+    'Tips & trik performa web, SEO, dan optimasi gambar.',
+    'Koding bareng, belajar bareng, tumbuh bareng.',
+  ]
+
+  let wordIdx = 0
+  let charIdx = 0
+  let isDeleting = false
+  let isPaused = false
+
+  const el = document.getElementById('typewriter-text')
+  if (el) {
+    function type() {
+      const current = words[wordIdx]
+
+      if (isPaused) {
+        isPaused = false
+        isDeleting = true
+        setTimeout(type, 50)
+        return
+      }
+
+      if (!isDeleting) {
+        el.textContent = current.slice(0, charIdx + 1)
+        charIdx++
+
+        if (charIdx === current.length) {
+          isPaused = true
+          setTimeout(type, 2500)
+          return
+        }
+        setTimeout(type, 45 + Math.random() * 60)
+      } else {
+        el.textContent = current.slice(0, charIdx)
+        charIdx--
+
+        if (charIdx < 0) {
+          isDeleting = false
+          charIdx = 0
+          wordIdx = (wordIdx + 1) % words.length
+          setTimeout(type, 400)
+          return
+        }
+        setTimeout(type, 25 + Math.random() * 40)
+      }
+    }
+
+    setTimeout(type, 800)
+  }
+</script>

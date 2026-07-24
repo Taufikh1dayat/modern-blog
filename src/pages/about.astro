@@ -3,7 +3,7 @@ import PageLayout from '../layouts/PageLayout.astro'
 import { SITE } from '../config/site'
 ---
 
-<PageLayout title="Tentang" description="Tentang blog {SITE.title}.">
+<PageLayout title="Tentang" description={"Tentang blog " + SITE.title}>
   <div class="prose-custom max-w-3xl">
     <p>
       {SITE.title} adalah blog teknologi yang berfokus pada pengembangan web modern, pemrograman,
