@@ -1,6 +1,6 @@
-# Modern Tech Blog
+# TaufikDev
 
-Blog statis modern untuk publikasi artikel teknologi dengan fokus pada performa, SEO, dan pengalaman membaca.
+Blog statis modern — tutorial teknologi, pemrograman, dan pengembangan web. Dark/light mode, search, animasi smooth.
 
 ## Tech Stack
 
@@ -9,23 +9,15 @@ Blog statis modern untuk publikasi artikel teknologi dengan fokus pada performa,
 - **Tailwind CSS** v4 — Utility-first CSS
 - **MDX** — Content dengan JSX
 - **Pagefind** — Static search
-- **Lucide Icons** — Icon set
-- **Cloudflare Pages / Vercel** — Deployment
+- **Cloudflare Pages** — Deployment
 
 ## Memulai
 
 ```bash
-# Install dependencies
 npm install
-
-# Jalankan dev server
-npm run dev
-
-# Build production
-npm run build
-
-# Preview build
-npm run preview
+npm run dev      # dev server
+npm run build    # build production
+npm run preview  # preview build
 ```
 
 ## Struktur Folder
@@ -44,30 +36,25 @@ src/
 
 ## Deployment
 
-### Cloudflare Pages
+Build command: `npm run build` — output `dist/`.
+
+Deploy ke **Cloudflare Pages** atau **Vercel**:
 
 1. Push ke GitHub
-2. Hubungkan repo ke Cloudflare Pages
+2. Hubungkan repo ke Cloudflare Pages / Vercel
 3. Build command: `npm run build`
 4. Output directory: `dist`
 
-### Vercel
-
-1. Push ke GitHub
-2. Import project ke Vercel
-3. Framework: Astro
-4. Build command: `npm run build`
-
 ## Menulis Artikel
 
-Buat file `.mdx` di `src/content/blog/` dengan frontmatter:
+Buat file `.mdx` di `src/content/blog/`:
 
 ```mdx
 ---
 title: 'Judul Artikel'
 description: 'Deskripsi singkat'
 pubDate: 2026-07-23
-author: 'Penghijauan Team'
+author: 'TaufikDev'
 tags: ['tag1', 'tag2']
 category: 'Kategori'
 featured: false
